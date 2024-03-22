@@ -27,7 +27,7 @@ class Client:
         return True
 
 
-def cvs_to_json(file):
+def csv_to_json(file):
     processed_rec = 0  # Обработанные клиенты
     missing_res = 0  # Пропущенные клиенты
     with open(file, 'r', encoding='utf-8') as csv_file:
@@ -49,13 +49,13 @@ def cvs_to_json(file):
                     processed_rec += 1
                 else:
                     missing_res += 1
-            except (ValueError, KeyError):
+            except KeyError:
                 missing_res += 1
 
         with open('clients.json', 'w', encoding='utf-8') as json_file:
             json.dump({'clients': clients}, json_file, ensure_ascii=False, indent=2)
 
-    print(f"Было обработано (клиентов): {processed_rec} \nБыло пропущено (клиентов)Ж {missing_res}")
+    print(f"Было обработано (клиентов): {processed_rec} \nБыло пропущено (клиентов): {missing_res}")
 
 
-cvs_to_json('clients.cvs')
+csv_to_json('clients.csv')

@@ -1,4 +1,5 @@
 import json
+import yaml
 
 inventory = {
     "inventory": [
@@ -39,5 +40,5 @@ def product_quantity(data):
 
 result = product_quantity(json_data)
 
-for item, required in result.items():
-    print(f"Необходимо закупить: {result} шт.")
+for items, required in result.items():
+    print(f"Необходимо закупить {yaml.dump(result, allow_unicode=True, default_flow_style=False)}")
