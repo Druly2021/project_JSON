@@ -1,5 +1,5 @@
 import json
-import yaml
+
 
 inventory = {
     "inventory": [
@@ -18,11 +18,8 @@ inventory = {
     ]
 }
 
-with open('inventory.json', 'w', encoding='utf-8') as write_file:
-    json.dump(inventory, write_file)
-
-with open('inventory.json', 'r', encoding='utf-8') as read_file:
-    json_data = json.load(read_file)
+with open('inventory.json', 'w', encoding='utf-8') as file:
+    json.dump(inventory, file)
 
 
 def product_quantity(data):
@@ -38,7 +35,10 @@ def product_quantity(data):
     return shop_list
 
 
-result = product_quantity(json_data)
+result = product_quantity(inventory)
 
-for items, required in result.items():
-    print(f"Необходимо закупить {yaml.dump(result, allow_unicode=True, default_flow_style=False)}")
+for items, inventory in result.items():
+    print(f"Необходимо закупить:  {items} {inventory} шт.")
+
+with open('inventory.json', 'r', encoding='utf-8') as file:
+    inventory = json.load(file)
